@@ -1,0 +1,26 @@
+{
+  "name": "yelp_camp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "mongoose": "^4.11.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SimeonNeisler/yelp_camp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SimeonNeisler/yelp_camp/issues"
+  },
+  "homepage": "https://github.com/SimeonNeisler/yelp_camp#readme"
+}
