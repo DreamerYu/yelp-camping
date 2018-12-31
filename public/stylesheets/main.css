@@ -14,3 +14,12 @@
   display: inline;
 
 }
+
+#map {
+  width: 250px;
+  height: 250px;
+}
+
+.hidden {
+  display: none;
+}

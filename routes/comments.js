@@ -6,10 +6,6 @@ var Campground = require("../models/campground"),
     Comment = require("../models/comment"),
     middleware = require("../middleware");
 
-// =====================
-// Comment Routes
-// =====================
-
 router.get("/new", middleware.isLoggedIn, (req, res) => {
   Campground.findById(req.params.id, (err, campground) => {
     if(err) {

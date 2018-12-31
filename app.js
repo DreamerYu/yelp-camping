@@ -8,7 +8,7 @@ var express = require("express"),
     methodOverride = require("method-override"),
     Campground = require("./models/campground"),
     Comment = require("./models/comment");
-    seedDB = require("./seeds");
+    //seedDB = require("./seeds");
 
 var User = require("./models/user");
 

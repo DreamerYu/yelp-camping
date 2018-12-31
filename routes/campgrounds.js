@@ -2,6 +2,9 @@ var express = require("express");
 var router = express.Router();
 var Campground = require("../models/campground");
 var middleware = require("../middleware");
+var googleMapsClient = require('@google/maps').createClient({
+  key: process.env.MAPS_API
+});
 
 
 //Campground Routes
@@ -28,10 +31,12 @@ router.get("/new", middleware.isLoggedIn, (req, res) => {
 
 //CREATE - adds new campground to DB
 router.post("/", middleware.isLoggedIn, (req, res) => {
+  console.log(req.body.address)
   var name = req.body.name;
   var price = req.body.price;
   var image = req.body.image;
   var desc = req.body.description;
+  var address = req.body.address;
   var author = {
     id: req.user._id,
     username: req.user.username
@@ -41,18 +46,18 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
       price: price,
       image: image,
       description: desc,
+      address: address,
       author: author
     }, function(err, campground) {
       if (err) {
         console.log(err);
       } else {
-        console.log("New Campground!");
-        console.log(campground);
+        /*console.log("New Campground!");
+        console.log(campground);*/
       }
     });
   res.redirect("/campgrounds");
 });
-
 
 //Find campground with provided ID
 router.get("/:id", (req, res) => {
@@ -60,8 +65,20 @@ router.get("/:id", (req, res) => {
     if(err) {
       console.log(err);
     } else {
-      console.log(foundCampground);
-      res.render("campgrounds/show", {campground: foundCampground});
+      var address = foundCampground.address;
+      googleMapsClient.geocode({
+        address: address
+      }, (err, response) => {
+        if(!err) {
+          var coordinates = response.json.results[0].geometry.location;
+          res.render("campgrounds/show", {
+            campground: foundCampground,
+            coordinates: coordinates
+          });
+        } else {
+          console.log(err);
+        }
+      });
     }
   });
 });

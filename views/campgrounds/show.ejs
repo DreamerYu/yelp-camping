@@ -8,6 +8,20 @@
         <li class="list-group-item">Info 2</li>
         <li class="list-group-item">Info 3</li>
       </div>
+      <div id="address">
+        <%= campground.address %>
+      </div>
+      <div class="hidden">
+        <div id="lat">
+          <%= coordinates.lat %>
+        </div>
+        <div id="lng">
+          <%= coordinates.lng %>
+        </div>
+      </div>
+      <div id="map">
+
+      </div>
     </div>
     <div class="col-md-9">
       <div class="thumbnail">
@@ -49,7 +63,19 @@
   </div>
 </div>
 
+<script>
+  function initMap() {
+    var lat = document.getElementById("lat").innerHTML;
+    var lng = document.getElementById("lng").innerHTML;
+    console.log(lat + " " + lng);
+    var map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 15,
+      center: new google.maps.LatLng(lat, lng)
+    });
+  }
+</script>
 
+<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
 
 
 <% include ../partials/footer.ejs %>
