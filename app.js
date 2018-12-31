@@ -19,7 +19,8 @@ var indexRoutes = require("./routes/index"),
 
 var app = express();
 
-mongoose.connect("mongodb://localhost/yelpcamp");
+//mongoose.connect("mongodb://localhost/yelpcamp");
+mongoose.connect("mongodb://yelpcampHeroku:En0f32$zxk@ds119014.mlab.com:19014/yelpcampneisler");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -51,6 +52,6 @@ app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
 
-app.listen(3000, process.env.IP, (req, res) => {
+app.listen(process.env.PORT, process.env.IP, (req, res) => {
   console.log("Server online");
 });
