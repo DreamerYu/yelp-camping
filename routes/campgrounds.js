@@ -2,8 +2,9 @@ var express = require("express");
 var router = express.Router();
 var Campground = require("../models/campground");
 var middleware = require("../middleware");
+var keys = require('../config/keys');
 var googleMapsClient = require('@google/maps').createClient({
-  key: process.env.MAPS_API
+  key: keys.googleMapsKey
 });
 
 
@@ -24,13 +25,13 @@ router.get("/", (req, res) => {
 
 
 //NEW - show form to create new campground
-router.get("/new", middleware.isLoggedIn, (req, res) => {
+router.get("/new", middleware.isLoggedIn, middleware.isVerified, (req, res) => {
   res.render("campgrounds/new");
 });
 
 
 //CREATE - adds new campground to DB
-router.post("/", middleware.isLoggedIn, (req, res) => {
+router.post("/", middleware.isLoggedIn, middleware.isVerified, (req, res) => {
   console.log(req.body.address)
   var name = req.body.name;
   var price = req.body.price;

@@ -1,11 +1,11 @@
 <% include ./partials/header %>
 
-<h1>Login</h1>
-
-<form action="/login" method="post">
+<div class="container">
+<h1 class="center">Login</h1>
+<form class="center" action="/login" method="post">
   <input type="text" name="username" placeholder="username">
   <input type="password" name="password" placeholder="password">
-  <input type="submit" name="" value="Login">
+  <input class="btn btn-success" type="submit" name="" value="Login">
 </form>
-
+</div>
 <% include ./partials/footer %>

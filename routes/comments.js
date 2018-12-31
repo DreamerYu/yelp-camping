@@ -6,7 +6,7 @@ var Campground = require("../models/campground"),
     Comment = require("../models/comment"),
     middleware = require("../middleware");
 
-router.get("/new", middleware.isLoggedIn, (req, res) => {
+router.get("/new", middleware.isLoggedIn, middleware.isVerified, (req, res) => {
   Campground.findById(req.params.id, (err, campground) => {
     if(err) {
       console.log(err);
@@ -16,7 +16,7 @@ router.get("/new", middleware.isLoggedIn, (req, res) => {
   });
 });
 
-router.post("/", middleware.isLoggedIn, (req, res) => {
+router.post("/", middleware.isLoggedIn, middleware.isVerified, (req, res) => {
   Campground.findById(req.params.id, (err, campground) => {
     if(err) {
       console.log(err);

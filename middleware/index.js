@@ -54,6 +54,14 @@ var middlewareObj = {
     }
     req.flash("error", "Must Login to perform action.");
     res.redirect("/login");
+  },
+
+  isVerified: function (req, res, next) {
+    if(req.user.verified == true) {
+      return next();
+    }
+    req.flash("error", "Check your email for verified.");
+    res.redirect("/");
   }
 
 }
